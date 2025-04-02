@@ -11,15 +11,17 @@ describe("cypress simulator - validações de acessibilidade", () => {
         cy.injectAxe()
     })
 
-    it("executar um comando válido", () => {
-        cy.run("cy.get('button')")
+    Cypress._.times(100, () => {
+        it("executar um comando válido", () => {
+            cy.run("cy.get('button')")
 
-        cy.get("#outputArea", { timeout: 6000 })
-            .should("contain", "Success:")
-            .and("contain", "cy.get('button') // Got element by selector 'button'")
-            .and("be.visible")
+            cy.get("#outputArea", { timeout: 6000 })
+                .should("contain", "Success:")
+                .and("contain", "cy.get('button') // Got element by selector 'button'")
+                .and("be.visible")
 
-        cy.checkA11y(".success")
+            cy.checkA11y(".success")
+        })
     })
 
     it("executar um comando inválido", () => {
