@@ -1,17 +1,18 @@
 describe("cypress simulator - validações de acessibilidade", () => {
     beforeEach(() => {
+        cy.login()
+
         cy.visit("./src/index.html?skipCaptcha=true", {
             onBeforeLoad(win) {
                 win.localStorage.setItem("cookieConsent", "accepted")
             }
         })
-        cy.contains("button", "Login").click()
+
         cy.injectAxe()
     })
 
     it("executar um comando válido", () => {
-        cy.get("#codeInput").type("cy.get('button')")
-        cy.get("#runButton").click()
+        cy.run("cy.get('button')")
 
         cy.get("#outputArea", { timeout: 6000 })
             .should("contain", "Success:")
@@ -22,8 +23,7 @@ describe("cypress simulator - validações de acessibilidade", () => {
     })
 
     it("executar um comando inválido", () => {
-        cy.get("#codeInput").type("cy.run()")
-        cy.get("#runButton").click()
+        cy.run("cy.run()")
 
         cy.get("#outputArea", { timeout: 6000 })
             .should("contain", "Error:")
@@ -34,8 +34,7 @@ describe("cypress simulator - validações de acessibilidade", () => {
     })
 
     it("executar um comando válido pendente de implementação", () => {
-        cy.get("#codeInput").type("cy.contains('Login')")
-        cy.get("#runButton").click()
+        cy.run("cy.contains('Login')")
 
         cy.get("#outputArea", { timeout: 6000 })
             .should("contain", "Warning:")
@@ -46,8 +45,7 @@ describe("cypress simulator - validações de acessibilidade", () => {
     })
 
     it("pedir ajuda", () => {
-        cy.get("#codeInput").type("help")
-        cy.get("#runButton").click()
+        cy.run("help")
 
         cy.get("#outputArea", { timeout: 6000 })
             .should("contain", "Common Cypress commands and examples:")
@@ -63,8 +61,7 @@ describe("cypress simulator - validações de acessibilidade", () => {
     })
 
     it("maximizar e minimizar o output", () => {
-        cy.get("#codeInput").type("cy.get('button')")
-        cy.get("#runButton").click()
+        cy.run("cy.get('button')")
 
         cy.get("#expandIcon")
             .should("be.visible")
@@ -108,9 +105,7 @@ describe("cypress simulator - validações de acessibilidade", () => {
     })
 
     it("estado de comando em execução antes de mostrar o resultado final", () => {
-        cy.get("#codeInput").type("cy.get('button')")
-
-        cy.get("#runButton").click()
+        cy.run("cy.get('button')")
 
         cy.get("#runButton")
             .should('be.disabled')
@@ -137,8 +132,8 @@ describe("cypress simulator - validações de acessibilidade", () => {
 
 describe("cypress simulator - consentimento de cookies - validações de acessibilidade", () => {
     beforeEach(() => {
+        cy.login()
         cy.visit("./src/index.html?skipCaptcha=true")
-        cy.contains("button", "Login").click()
         cy.injectAxe()
     })
 

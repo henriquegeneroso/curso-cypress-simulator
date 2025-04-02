@@ -1,16 +1,16 @@
 describe("cypress simulator", () => {
   beforeEach(() => {
+    cy.login()
+
     cy.visit("./src/index.html?skipCaptcha=true", {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted")
       }
     })
-    cy.contains("button", "Login").click()
   })
 
   it("executar um comando válido faltando parênteses", () => {
-    cy.get("#codeInput").type("cy.visit")
-    cy.get("#runButton").click()
+    cy.run("cy.visit")
 
     cy.get("#outputArea", { timeout: 6000 })
       .should("contain", "Error:")
@@ -36,8 +36,7 @@ describe("cypress simulator", () => {
   })
 
   it("resetar output ao deslogar e logar", () => {
-    cy.get("#codeInput").type("cy.get('button')")
-    cy.get("#runButton").click()
+    cy.run("cy.get('button')")
 
     cy.get("#outputArea", { timeout: 6000 })
       .should("contain", "Success:")
@@ -61,8 +60,8 @@ describe("cypress simulator", () => {
 
 describe("cypress simulator - consentimento de cookies", () => {
   beforeEach(() => {
+    cy.login()
     cy.visit("./src/index.html?skipCaptcha=true")
-    cy.contains("button", "Login").click()
   })
 
   it("rejeitar cookies", () => {
