@@ -75,7 +75,7 @@ describe("cypress simulator - consentimento de cookies", () => {
   })
 })
 
-describe("Erro na Matrix", () => {
+describe("cypress simulator - erro na matrix", () => {
   beforeEach(() => {
     cy.login()
 
