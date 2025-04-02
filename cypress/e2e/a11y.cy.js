@@ -2,7 +2,7 @@ describe("cypress simulator - validações de acessibilidade", () => {
     beforeEach(() => {
         cy.login()
 
-        cy.visit("./src/index.html?skipCaptcha=true", {
+        cy.visit("./src/index.html?skipCaptcha=true&chancesOfError=0", {
             onBeforeLoad(win) {
                 win.localStorage.setItem("cookieConsent", "accepted")
             }
@@ -11,17 +11,15 @@ describe("cypress simulator - validações de acessibilidade", () => {
         cy.injectAxe()
     })
 
-    Cypress._.times(100, () => {
-        it("executar um comando válido", () => {
-            cy.run("cy.get('button')")
+    it("executar um comando válido", () => {
+        cy.run("cy.get('button')")
 
-            cy.get("#outputArea", { timeout: 6000 })
-                .should("contain", "Success:")
-                .and("contain", "cy.get('button') // Got element by selector 'button'")
-                .and("be.visible")
+        cy.get("#outputArea", { timeout: 6000 })
+            .should("contain", "Success:")
+            .and("contain", "cy.get('button') // Got element by selector 'button'")
+            .and("be.visible")
 
-            cy.checkA11y(".success")
-        })
+        cy.checkA11y(".success")
     })
 
     it("executar um comando inválido", () => {
