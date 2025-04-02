@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mainContent.style.display = "flex"
       sandwichMenu.style.display = "flex"
       captchaError.style.display = "none"
-      // captchaInput.value = ""
+      captchaInput.value = ""
       verifyCaptchaButton.disabled = true
 
       checkCookieConsent()
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("cypressSimulatorSession")
 
-    // codeInput.value = ""
+    codeInput.value = ""
     outputArea.innerHTML = ""
     runButton.disabled = true
     loginForm.style.display = "flex"
