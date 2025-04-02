@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mainContent.style.display = "flex"
       sandwichMenu.style.display = "flex"
       captchaError.style.display = "none"
-      captchaInput.value = ""
+      // captchaInput.value = ""
       verifyCaptchaButton.disabled = true
 
       checkCookieConsent()
