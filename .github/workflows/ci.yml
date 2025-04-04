@@ -1,10 +1,14 @@
 name: End-to-end tests
 on: push
 jobs:
-  tests:
+  run-automation:
     runs-on: self-hosted
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar automação
+        run: npm run test
