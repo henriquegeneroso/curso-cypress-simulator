@@ -2,7 +2,7 @@ name: End-to-end tests
 on: push
 jobs:
   tests:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     strategy:
       fail-fast: false
       matrix:
