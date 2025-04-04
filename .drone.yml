@@ -4,11 +4,11 @@ name: cypress-tests
 
 steps:
   - name: install dependencies
-    image: cypress/browsers:node-18.12.0-chrome-106
+    image: cypress/browsers:latest
     commands:
       - npm ci
 
   - name: run cypress tests
-    image: cypress/browsers:node-18.12.0-chrome-106
+    image: cypress/browsers:latest
     commands:
       - npm run cy:run
