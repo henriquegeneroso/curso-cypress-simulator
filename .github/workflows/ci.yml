@@ -3,9 +3,15 @@ on: push
 jobs:
   run-automation:
     runs-on: self-hosted
+    strategy:
+      matrix:
+        containers: [1, 2]
     defaults:
       run:
         shell: cmd
+    env:
+      CYPRESS_SPLIT_CI_BUILD_ID: run-${{ github.run_id }}
+      CYPRESS_SPLIT_SHARD_TOTAL: 2
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
@@ -14,4 +20,6 @@ jobs:
         run: npm ci
 
       - name: Rodar automação
+        env:
+          CYPRESS_SPLIT_SHARD_INDEX: ${{ matrix.containers }}
         run: npm run cy:run
