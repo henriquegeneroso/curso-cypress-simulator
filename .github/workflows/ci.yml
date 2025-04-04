@@ -14,4 +14,4 @@ jobs:
         run: npm ci
 
       - name: Rodar automação
-        run: npm run test
+        run: npm run cy:run
