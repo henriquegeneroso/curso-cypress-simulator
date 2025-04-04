@@ -21,6 +21,7 @@ jobs:
         with:
           install: false
           runTests: true
+          browser: chrome
         env:
           SPLIT: 2
           SPLIT_INDEX: ${{ matrix.shardIndex }} 
