@@ -5,7 +5,8 @@
   "main": "src/index.html",
   "scripts": {
     "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:split": "cypress-split run -- npm run cy:run"
   },
   "keywords": [
     "Testing",

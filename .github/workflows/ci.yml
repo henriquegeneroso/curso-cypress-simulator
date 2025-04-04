@@ -1,27 +1,25 @@
 name: End-to-end tests
-
 on: push
-
 jobs:
   run-automation:
     runs-on: self-hosted
     strategy:
       matrix:
-        shardIndex: [0, 1]
+        containers: [1, 2]
     defaults:
       run:
         shell: cmd
+    env:
+      CYPRESS_SPLIT_CI_BUILD_ID: run-${{ github.run_id }}
+      CYPRESS_SPLIT_SHARD_TOTAL: 2
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
       - name: Instalar dependências
         run: npm ci
-      - name: Rodar testes Cypress em paralelo
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          runTests: true
-          browser: chrome
+
+      - name: Rodar automação
         env:
-          SPLIT: 2
-          SPLIT_INDEX: ${{ matrix.shardIndex }} 
+          CYPRESS_SPLIT_SHARD_INDEX: ${{ matrix.containers }}
+        run: npm run cy:split
