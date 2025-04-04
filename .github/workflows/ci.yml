@@ -2,7 +2,7 @@ name: End-to-end tests
 on: push
 jobs:
   run-automation:
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows]
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
