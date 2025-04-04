@@ -3,22 +3,8 @@ on: push
 jobs:
   tests:
     runs-on: self-hosted
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [1, 2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Run Cypress tests in parallel 🧪
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v6
-        env:
-          SPLIT: ${{ strategy.job-total }}
-          SPLIT_INDEX: ${{ strategy.job-index }}
-      - name: Save screenshots in case of failures
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore
