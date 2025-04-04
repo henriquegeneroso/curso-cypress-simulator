@@ -3,15 +3,25 @@ on: push
 jobs:
   run-automation:
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
     defaults:
       run:
         shell: cmd
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
-
-      - name: Instalar dependências
-        run: npm ci
-
-      - name: Rodar automação
-        run: npm run cy:run
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Cypress tests in parallel 🧪
+        uses: cypress-io/github-action@v6
+        env:
+          SPLIT: ${{ strategy.job-total }}
+          SPLIT_INDEX: ${{ strategy.job-index }}
+      - name: Save screenshots in case of failures
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
