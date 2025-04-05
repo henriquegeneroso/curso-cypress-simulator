@@ -15,4 +15,4 @@ steps:
     commands:
       - echo "Executando SPLIT=$SPLIT de $SPLIT_TOTAL"
       - npm ci
-      - npx cypress-split run --split=$SPLIT --total=$SPLIT_TOTAL --ci-build-id=$DRONE_BUILD_NUMBER
+      - npm run cy:run
