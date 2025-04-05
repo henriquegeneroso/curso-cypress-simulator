@@ -10,5 +10,15 @@ steps:
 
   - name: run cypress tests
     image: cypress/included:latest
+    environment:
+      SPLIT: ${SPLIT}
+      SPLIT_TOTAL: ${SPLIT_TOTAL}
     commands:
       - npm run cy:run
+
+matrix:
+  include:
+    - SPLIT: 0
+      SPLIT_TOTAL: 2
+    - SPLIT: 1
+      SPLIT_TOTAL: 2
