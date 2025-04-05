@@ -4,18 +4,18 @@ name: cypress-tests
 
 matrix:
   include:
-    - PART: 0
-      PART_TOTAL: 2
-    - PART: 1
-      PART_TOTAL: 2
+    - SPLIT: 0
+      SPLIT_TOTAL: 2
+    - SPLIT: 1
+      SPLIT_TOTAL: 2
 
 steps:
-  - name: run cypress
-    image: cypress/included:13.6.6
+  - name: run cypress tests
+    image: cypress/included:latest
     environment:
-      PART: ${PART}
-      PART_TOTAL: ${PART_TOTAL}
+      SPLIT: ${SPLIT}
+      SPLIT_TOTAL: ${SPLIT_TOTAL}
     commands:
-      - echo "Executando parte $PART de $PART_TOTAL"
+      - echo "Executando SPLIT=$SPLIT de $SPLIT_TOTAL"
       - npm ci
-      - npx cypress-split --ci-build-id $DRONE_BUILD_NUMBER --split $PART --total $PART_TOTAL run
+      - npm run cy:run
