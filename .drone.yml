@@ -1,9 +1,6 @@
 kind: pipeline
 name: cypress-runner-1
 
-node: 
-  runner: one
-
 steps:
   - name: run-cypress-part-1
     image: cypress/included:latest
@@ -18,9 +15,6 @@ steps:
 
 kind: pipeline
 name: cypress-runner-2
-
-node: 
-  runner: two
 
 steps:
   - name: run-cypress-part-2
