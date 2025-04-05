@@ -13,9 +13,11 @@ steps:
   - name: run cypress tests
     image: cypress/included:latest
     environment:
-      SPLIT: ${SPLIT}
-      SPLIT_TOTAL: ${SPLIT_TOTAL}
+      SPLIT:
+        from_secret: SPLIT
+      SPLIT_TOTAL:
+        from_secret: SPLIT_TOTAL
     commands:
-      - echo "Executando SPLIT=$SPLIT de $SPLIT_TOTAL"
+      - echo "Executando SPLIT={$SPLIT} de ${SPLIT_TOTAL}"
       - npm ci
       - npm run cy:run
