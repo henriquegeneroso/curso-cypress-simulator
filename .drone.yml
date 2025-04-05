@@ -20,7 +20,7 @@ kind: pipeline
 name: cypress-runner-2
 
 node: 
-  node: runner-1
+  node: runner-2
 
 steps:
   - name: run-cypress-part-2
