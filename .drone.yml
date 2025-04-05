@@ -1,6 +1,7 @@
 kind: pipeline
 name: cypress-runner-1
-labels:
+
+node: 
   node: runner-1
 
 steps:
@@ -17,8 +18,9 @@ steps:
 
 kind: pipeline
 name: cypress-runner-2
-labels:
-  node: runner-2
+
+node: 
+  node: runner-1
 
 steps:
   - name: run-cypress-part-2
