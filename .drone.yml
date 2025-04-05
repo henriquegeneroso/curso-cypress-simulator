@@ -10,15 +10,12 @@ matrix:
       SPLIT_TOTAL: 2
 
 steps:
-  - name: install dependencies
-    image: cypress/included:latest
-    commands:
-      - npm ci
-
   - name: run cypress tests
     image: cypress/included:latest
     environment:
       SPLIT: ${SPLIT}
       SPLIT_TOTAL: ${SPLIT_TOTAL}
     commands:
+      - echo "Executando SPLIT=$SPLIT de $SPLIT_TOTAL"
+      - npm ci
       - npm run cy:run
