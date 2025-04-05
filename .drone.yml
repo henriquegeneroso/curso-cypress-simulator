@@ -41,7 +41,9 @@ trigger:
     - main
 
 matrix:
-  SPLIT_INDEX: [0, 1]
+  environment:
+    - SPLIT_INDEX: 0
+    - SPLIT_INDEX: 1
 
 steps:
   - name: cypress-split-${SPLIT_INDEX}
