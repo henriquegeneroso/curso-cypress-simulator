@@ -1,18 +1,31 @@
 kind: pipeline
-type: docker
-name: cypress-tests
-
-matrix:
-  include:
-    - SPLIT: 0
-      SPLIT_TOTAL: 2
-    - SPLIT: 1
-      SPLIT_TOTAL: 2
+name: cypress-runner-1
+labels:
+  node: runner-1
 
 steps:
-  - name: run cypress tests
+  - name: run-cypress-part-1
     image: cypress/included:latest
+    environment:
+      - SPLIT: 2
+      - SPLIT_INDEX: 0
     commands:
-      - echo "Executando SPLIT=$SPLIT de $SPLIT_TOTAL"
+      - npm ci
+      - npm run cy:run
+
+---
+
+kind: pipeline
+name: cypress-runner-2
+labels:
+  node: runner-2
+
+steps:
+  - name: run-cypress-part-2
+    image: cypress/included:latest
+    environment:
+      - SPLIT: 2
+      - SPLIT_INDEX: 1
+    commands:
       - npm ci
       - npm run cy:run
