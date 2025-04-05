@@ -18,6 +18,6 @@ steps:
       SPLIT_TOTAL:
         from_secret: SPLIT_TOTAL
     commands:
-      - echo "Executando SPLIT={$SPLIT} de ${SPLIT_TOTAL}"
+      - echo "Executando SPLIT=${SPLIT} de ${SPLIT_TOTAL}"
       - npm ci
       - npm run cy:run
