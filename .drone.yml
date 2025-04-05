@@ -4,11 +4,11 @@ name: cypress-tests
 
 steps:
   - name: install dependencies
-    image: cypress/browsers:latest
+    image: cypress/included:latest
     commands:
       - npm ci
 
   - name: run cypress tests
-    image: cypress/browsers:latest
+    image: cypress/included:latest
     commands:
       - npm run cy:run
