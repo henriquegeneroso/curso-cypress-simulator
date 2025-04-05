@@ -7,8 +7,8 @@ steps:
   - name: run-cypress-part-1
     image: cypress/included:latest
     environment:
-      - SPLIT: 2
-      - SPLIT_INDEX: 0
+      SPLIT: 2
+      SPLIT_INDEX: 0
     commands:
       - npm ci
       - npm run cy:run
@@ -24,8 +24,8 @@ steps:
   - name: run-cypress-part-2
     image: cypress/included:latest
     environment:
-      - SPLIT: 2
-      - SPLIT_INDEX: 1
+      SPLIT: 2
+      SPLIT_INDEX: 1
     commands:
       - npm ci
       - npm run cy:run
