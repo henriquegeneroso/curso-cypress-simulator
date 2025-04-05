@@ -12,12 +12,7 @@ matrix:
 steps:
   - name: run cypress tests
     image: cypress/included:latest
-    environment:
-      SPLIT:
-        from_secret: SPLIT
-      SPLIT_TOTAL:
-        from_secret: SPLIT_TOTAL
     commands:
-      - echo "Executando SPLIT=${SPLIT} de ${SPLIT_TOTAL}"
+      - echo "Executando SPLIT=$SPLIT de $SPLIT_TOTAL"
       - npm ci
-      - npm run cy:run
+      - npx cypress-split run --split=$SPLIT --total=$SPLIT_TOTAL --ci-build-id=$DRONE_BUILD_NUMBER
