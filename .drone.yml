@@ -2,6 +2,13 @@ kind: pipeline
 type: docker
 name: cypress-tests
 
+matrix:
+  include:
+    - SPLIT: 0
+      SPLIT_TOTAL: 2
+    - SPLIT: 1
+      SPLIT_TOTAL: 2
+
 steps:
   - name: install dependencies
     image: cypress/included:latest
@@ -15,10 +22,3 @@ steps:
       SPLIT_TOTAL: ${SPLIT_TOTAL}
     commands:
       - npm run cy:run
-
-matrix:
-  include:
-    - SPLIT: 0
-      SPLIT_TOTAL: 2
-    - SPLIT: 1
-      SPLIT_TOTAL: 2
