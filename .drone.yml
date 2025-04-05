@@ -1,56 +1,27 @@
-# kind: pipeline
-# name: cypress-runner-1
-
-# node: 
-#   runner: one
-
-# steps:
-#   - name: run-cypress-part-1
-#     image: cypress/included:latest
-#     environment:
-#       SPLIT: 2
-#       SPLIT_INDEX: 0
-#     commands:
-#       - npm ci
-#       - npm run cy:run
-
-# ---
-
-# kind: pipeline
-# name: cypress-runner-2
-
-# node: 
-#   runner: two
-
-# steps:
-#   - name: run-cypress-part-2
-#     image: cypress/included:latest
-#     environment:
-#       SPLIT: 2
-#       SPLIT_INDEX: 1
-#     commands:
-#       - npm ci
-#       - npm run cy:run
-
 kind: pipeline
-type: docker
-name: cypress-parallel
-
-trigger:
-  branch:
-    - main
-
-matrix:
-  environment:
-    - SPLIT_INDEX: 0
-    - SPLIT_INDEX: 1
+name: cypress-runner-1
 
 steps:
-  - name: cypress-split-${SPLIT_INDEX}
+  - name: run-cypress-part-1
     image: cypress/included:latest
     environment:
       SPLIT: 2
-      SPLIT_INDEX: ${SPLIT_INDEX}
+      SPLIT_INDEX: 0
+    commands:
+      - npm ci
+      - npm run cy:run
+
+---
+
+kind: pipeline
+name: cypress-runner-2
+
+steps:
+  - name: run-cypress-part-2
+    image: cypress/included:latest
+    environment:
+      SPLIT: 2
+      SPLIT_INDEX: 1
     commands:
       - npm ci
       - npm run cy:run
